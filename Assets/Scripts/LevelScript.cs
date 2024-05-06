@@ -53,8 +53,9 @@ public class LevelScript : MonoBehaviour
         EventSystem.current.RaycastAll(eventData, results);
         foreach (RaycastResult result in results)
         {
-            if (result.gameObject == towerShopPanel)
+            if (result.gameObject == towerShopPanel || result.gameObject == towerUpgradePanel)
                 return true; // Click was on the panel
+            
         }
         return false; // Click was outside the panel
     }
@@ -203,7 +204,10 @@ public class LevelScript : MonoBehaviour
         if (Input.GetMouseButtonDown(0)) // Checks if the left mouse button was pressed
         {
             if (!IsPointerOverUIObject())
+            {
                 ClosePanel();
+                towerUpgradePanel.SetActive(false);
+            }
         }
 
         // Continuously update the gold display in the UI

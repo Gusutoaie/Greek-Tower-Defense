@@ -77,10 +77,16 @@ public class Tower
                                     if (button.GetComponent<Image>().name == "PoseidonTowerButton1")
                                     {
                                         towerPositions.transform.GetChild(i).GetComponent<UnityEngine.UI.Image>().sprite = button.GetComponent<UnityEngine.UI.Image>().sprite;
+                                        //Bring from button audio source to tower audio source
+                                        towerPositions.transform.GetChild(i).GetComponent<AudioSource>().clip = button.GetComponent<AudioSource>().clip;
+                                        AudioSource audio = towerPositions.transform.GetChild(i).GetComponent<AudioSource>();
+                                        audio.volume = 1;
+                                        audio.Play();
                                         Level++;
                                         Gold -= NeedMoney; // Deduct the money after successful upgrade
                                         Bullet.SetDamage(2);
                                         Bullet.ChangebulletSpeed(5f);
+                                        
                                         break;
                                     }
                                 }
@@ -92,10 +98,15 @@ public class Tower
                                     if (button.GetComponent<Image>().name == "PoseidonTowerButton2")
                                     {
                                         towerPositions.transform.GetChild(i).GetComponent<UnityEngine.UI.Image>().sprite = button.GetComponent<UnityEngine.UI.Image>().sprite;
+                                        towerPositions.transform.GetChild(i).GetComponent<AudioSource>().clip = button.GetComponent<AudioSource>().clip;
+                                        AudioSource audio = towerPositions.transform.GetChild(i).GetComponent<AudioSource>();
+                                        audio.volume = 1;
+                                        audio.Play();
                                         Level++;
                                         Gold -= NeedMoney; // Deduct the money after successful upgrade
                                         Bullet.SetDamage(1);
                                         Bullet.ChangebulletSpeed(7f);
+                                        
                                         break;
                                     }
                                 }
@@ -108,20 +119,26 @@ public class Tower
                                     if (button.GetComponent<Image>().name == "PoseidonTowerButton3")
                                     {
                                         towerPositions.transform.GetChild(i).GetComponent<UnityEngine.UI.Image>().sprite = button.GetComponent<UnityEngine.UI.Image>().sprite;
+                                        towerPositions.transform.GetChild(i).GetComponent<AudioSource>().clip = button.GetComponent<AudioSource>().clip;
+                                        AudioSource audio = towerPositions.transform.GetChild(i).GetComponent<AudioSource>();
+                                        audio.volume = 1;
+                                        audio.Play();
                                         Level++;
                                         Gold -= NeedMoney; // Deduct the money after successful upgrade
                                         Bullet.SetDamage(1.2f);
                                         Bullet.ChangebulletSpeed(6f);
+                                       
                                         break;
                                     }
                                 }
                             }
-           
-
-                            
                             
 
-                           
+
+
+
+
+
                             break;
                         }
 
