@@ -34,10 +34,8 @@ public class HealthScript : MonoBehaviour
     private void UpdateHealthBar()
     {
         float healthPercentage = currentHitPoints / maxHitPoints;
-        Debug.Log("Health Percentage: " + healthPercentage);
 
         healthFill.transform.localScale = new Vector3(healthPercentage, 1, 1); // Scale only in X-direction
-        Debug.Log("Updated Health Bar: " + healthFill.size);
 
     }
 }

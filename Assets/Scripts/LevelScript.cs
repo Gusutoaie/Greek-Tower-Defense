@@ -18,17 +18,19 @@ public class LevelScript : MonoBehaviour
 
     public GameObject towerPositions;
     public GameObject towerShopPanel;
-    public GameObject towerUpgradePanel;
     public GameObject MessagesPanel;
     public GameObject InfoPanel;
     public GameObject WavePanel;
+
+
+
 
     public Transform startPoint;
 
     // create a list of towers that the player can buy
     [SerializeField] public Button[] towerButtons;
-
     [SerializeField] public Transform[] _enemyPaths;
+    [SerializeField] public GameObject[] TowerUpgradePanels;
     private Transform target;
     private int pathIndex = 0;
 
@@ -86,7 +88,8 @@ public class LevelScript : MonoBehaviour
 
     private void DisplayTowerUpgradePanel(Tower tower)
     {
-       tower.Upgrade(towerUpgradePanel, towerPositions);
+       tower.Upgrade(TowerUpgradePanels, towerPositions,tower);
+
     }
     public void ConfigureButton(Button button, Tower tower)
     {
@@ -105,8 +108,15 @@ public class LevelScript : MonoBehaviour
 
                 foreach (Button button in towerButtons)
                 {
-                    if (button.GetComponent<Image>().name == "PoseidonTowerButtonDefault")
+                    // actual tower button
+
+                    Debug.Log("button.GetComponent<Image>().name = " + button.GetComponent<Image>().name);
+                    Debug.Log("tower.Sprite.name = " + tower.Sprite.name);
+
+                    if (button.GetComponent<Image>().name == tower.Sprite.name)
                     {
+                        Debug.Log("towerPositions.transform.GetChild(i).transform.position= " + towerPositions.transform.GetChild(i).transform.position + "tower position = " + tower.Position);
+
                         towerPositions.transform.GetChild(i).GetComponent<Image>().sprite = button.GetComponent<Image>().sprite;
                         towerPositions.transform.GetChild(i).GetComponent<Button>().colors = ColorBlock.defaultColorBlock;
                         towerPositions.transform.GetChild(i).GetComponent<Image>().color = new Color(1, 1, 1, 1);
@@ -117,9 +127,39 @@ public class LevelScript : MonoBehaviour
                         tower.Position = new Vector3(currentX, currentY + 0.8f, 0);
 
                         towerPositions.transform.GetChild(i).GetComponent<RectTransform>().sizeDelta = tower.Rect.size;
+
+
+                        Transform infoPanel = towerPositions.transform.GetChild(i).Find("InfoPanel");
+
+                        Debug.Log("towerPositions.transform.GetChild(i).name = " + towerPositions.transform.GetChild(i).name);
+
+                        if (towerPositions.transform.GetChild(i).GetComponent<Button>().name == "TowerPosition2")
+                        {
+                            infoPanel.position = new Vector3(currentX - 1.5f, currentY, 0);
+
+                        }
+                        else
+                        {
+                            infoPanel.position = new Vector3(currentX + 1.5f, currentY, 0);
+
+                        }
+
+
+
+                        if (infoPanel != null)
+                        {
+                            infoPanel.gameObject.SetActive(true);
+                        }
+                        else
+                        {
+                            Debug.LogError("InfoPanel not found for tower at " + towerPositions.transform.GetChild(i).name);
+                        }
+
+
                         towerPositions.transform.GetChild(i).GetComponent<Button>().onClick.RemoveAllListeners();
                         towerPositions.transform.GetChild(i).GetComponent<Button>().onClick.AddListener(() =>
                         {
+                      
                             DisplayTowerUpgradePanel(tower);
                         });
                         TowerScript towerScript = towerPositions.transform.GetChild(i).GetComponent<TowerScript>();
@@ -136,6 +176,10 @@ public class LevelScript : MonoBehaviour
                         {
                             Debug.LogError("Firing point not found for tower at " + towerPositions.transform.GetChild(i).Find("FiringPoint").name);
                         }
+                        
+
+
+
                         break;
                     }
                 }

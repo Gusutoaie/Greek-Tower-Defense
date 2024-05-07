@@ -38,7 +38,6 @@ public class TowerScript : MonoBehaviour
 
         if (target == null)
         {
-            Debug.Log("if target == null");
 
             FindTarget();
             return;
@@ -48,18 +47,15 @@ public class TowerScript : MonoBehaviour
         {
             target = null;
 
-            Debug.Log("if CheckTargetIsInRange");
         }
         else
         {
-            Debug.Log("else CheckTargetIsInRange");
             timeUntilFire += Time.deltaTime;
             if (timeUntilFire >= 1f / bps)
             {
                 Shoot();
                 timeUntilFire = 0f;
 
-                Debug.Log("if Shoot");
             }
         }
         
@@ -70,7 +66,6 @@ public class TowerScript : MonoBehaviour
     {
         if (firingPoint == null)
         {
-            Debug.LogError("Firing point not set for " + gameObject.name);
             return;
         }
         GameObject bulletObj = Instantiate( LevelScript.main.bulletPrefab, firingPoint.position, Quaternion.identity);
@@ -90,9 +85,7 @@ public class TowerScript : MonoBehaviour
 
     private void FindTarget()
     {
-        Debug.Log("Current LayerMask: " +LevelScript.main.enemyMask.value);
         RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, targetingRange, Vector2.zero, 0f, LevelScript.main.enemyMask);
-        Debug.Log($"Hits detected: {hits.Length}");
 
         if (hits.Length > 0)
         {

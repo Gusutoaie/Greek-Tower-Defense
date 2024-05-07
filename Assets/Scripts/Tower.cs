@@ -41,10 +41,29 @@ public class Tower
     // Upgrade the tower if the player has enough money
 
 
-    public void Upgrade(GameObject panel, GameObject towerPositions)
+    public void Upgrade(GameObject[] panels, GameObject towerPositions,Tower tower)
     {
+        GameObject panel = null;
+        for (int i = 0; i < panels.Length; i++)
+        {
+            if (tower.Sprite.name.Contains("Aphrodita") && panels[i].name.Contains("Aphrodita"))
+            {
+                panel = panels[i];
+            }
+            else if (tower.Sprite.name.Contains("Poseidon") && panels[i].name.Contains("Poseidon"))
+            {
+                panel = panels[i];
+            }
+            else if (tower.Sprite.name.Contains("Hades") && panels[i].name.Contains("Hades"))
+            {
+                panel = panels[i];
+            }
+
+        }
+        panel.transform.position = tower.Position;
         panel.SetActive(true);
-        panel.transform.position = Position;
+
+
 
         foreach (Transform child in panel.transform)
         {
@@ -53,6 +72,7 @@ public class Tower
             {
                 button.onClick.AddListener(() =>
                 {
+
                     for (int i = 0; i < towerPositions.transform.childCount; i++)
                     {
                         // check if the user has enough money to upgrade the tower  
@@ -61,13 +81,14 @@ public class Tower
                             Debug.Log("NeedMoney = " + NeedMoney + "Cost = " + Gold);
                             Debug.Log("Not enough money to upgrade the tower");
                             panel.SetActive(false);
-                            
+
                             return;
-                        }else
-                     
+                        }
+                        else
+                            Debug.Log("tower.Position =" + tower.Position);
+                        Debug.Log("towerPositions.transform.GetChild(i).transform.position = " + towerPositions.transform.GetChild(i).transform.position);
 
-
-                        if (towerPositions.transform.GetChild(i).position == Position)
+                        if (towerPositions.transform.GetChild(i).transform.position == tower.Position)
                         {
 
                             if (button.GetComponent<Image>().name == "PoseidonHeadUpgrade1")
@@ -116,13 +137,8 @@ public class Tower
                                     }
                                 }
                             }
-           
-
-                            
-                            
-
+   
                            
-                            break;
                         }
 
                     }
