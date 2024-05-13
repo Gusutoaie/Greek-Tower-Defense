@@ -44,9 +44,9 @@ public class EnemyMovement : MonoBehaviour
 
                 EnemySpawner.onEnemyDestroy.Invoke();
              
-                  
+                
                 defaultLives--;
-                LevelScript.main.livesPanel.text = "Lives: " + defaultLives;
+                LevelScript.main.livesPanel.text =  defaultLives.ToString();
                 
                 Destroy(gameObject);
 

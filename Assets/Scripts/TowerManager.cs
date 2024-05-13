@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 
@@ -14,9 +15,9 @@ public class TowerManager : MonoBehaviour
 
     public enum TowerUpgradeType
     {
-        Speed,
-        Attack,
-        Range
+        Damage,
+        Range,
+        Speed
     }
     void Awake()
     {
@@ -29,7 +30,7 @@ public class TowerManager : MonoBehaviour
             Instance = this;
         }
     }
-
+  
     public void ProcessTowerButton(TowerData data, Button towerButton)
     {
         if (data == null)
@@ -109,7 +110,9 @@ public class TowerManager : MonoBehaviour
 
 
                             Transform infoPanel = child.transform.Find("InfoPanel");
-
+                            infoPanel.Find("Speed").GetComponent<Text>().text = $"Speed: 3";
+                            infoPanel.Find("Range").GetComponent<Text>().text = $"Range: 4";
+                            infoPanel.Find("Damage").GetComponent<Text>().text = $"Damage: 3";
                             if (child.transform.GetComponent<Button>().name == "TowerPosition2")
                             {
                                 infoPanel.position = new Vector3(currentX - 1.5f, currentY, 0);
@@ -125,9 +128,10 @@ public class TowerManager : MonoBehaviour
                                 infoPanel.gameObject.SetActive(true);
                             }
                             child.transform.GetComponent<Button>().onClick.RemoveAllListeners();
+
                             child.transform.GetComponent<Button>().onClick.AddListener(() =>
                             {
-                                DisplayUpgradeShopPanel(child.transform.position, "PoseidonTowerUpgradePanel", child.gameObject.GetComponent<TowerScript>());
+                                DisplayUpgradeShopPanel(child, "PoseidonTowerUpgradePanel", child.gameObject.GetComponent<TowerScript>());
                             });
                         }
                     }
@@ -163,7 +167,9 @@ public class TowerManager : MonoBehaviour
 
 
                             Transform infoPanel = child.transform.Find("InfoPanel");
-
+                            infoPanel.Find("Speed").GetComponent<Text>().text = $"Speed: 3";
+                            infoPanel.Find("Range").GetComponent<Text>().text = $"Range: 4";
+                            infoPanel.Find("Damage").GetComponent<Text>().text = $"Damage: 3";
                             if (child.transform.GetComponent<Button>().name == "TowerPosition2")
                             {
                                 infoPanel.position = new Vector3(currentX - 1.5f, currentY, 0);
@@ -182,7 +188,7 @@ public class TowerManager : MonoBehaviour
                             child.transform.GetComponent<Button>().onClick.RemoveAllListeners();
                                 child.transform.GetComponent<Button>().onClick.AddListener(() =>
                                 {
-                                    DisplayUpgradeShopPanel(child.transform.position, "HadesTowerUpgradePanel", child.gameObject.GetComponent<TowerScript>());
+                                    DisplayUpgradeShopPanel(child, "HadesTowerUpgradePanel", child.gameObject.GetComponent<TowerScript>());
                                 });
                         }
                         }
@@ -215,7 +221,9 @@ public class TowerManager : MonoBehaviour
 
 
                             Transform infoPanel = child.transform.Find("InfoPanel");
-
+                            infoPanel.Find("Speed").GetComponent<Text>().text = $"Speed: 3";
+                            infoPanel.Find("Range").GetComponent<Text>().text = $"Range: 4";
+                            infoPanel.Find("Damage").GetComponent<Text>().text = $"Damage: 3";
                             if (child.transform.GetComponent<Button>().name == "TowerPosition2")
                             {
                                 infoPanel.position = new Vector3(currentX - 1.5f, currentY, 0);
@@ -234,7 +242,7 @@ public class TowerManager : MonoBehaviour
                             child.transform.GetComponent<Button>().onClick.RemoveAllListeners();
                                 child.transform.GetComponent<Button>().onClick.AddListener(() =>
                                 {
-                                    DisplayUpgradeShopPanel(child.transform.position, "AphroditaTowerUpgradePanel", child.gameObject.GetComponent<TowerScript>());
+                                    DisplayUpgradeShopPanel(child, "AphroditaTowerUpgradePanel", child.gameObject.GetComponent<TowerScript>());
                                 });
                         }
                         }
@@ -243,6 +251,7 @@ public class TowerManager : MonoBehaviour
                 }
 
             }
+            towerShopPanel.SetActive(false);
         }
 
 
@@ -281,18 +290,22 @@ public class TowerManager : MonoBehaviour
 
     }
 
-    public void DisplayUpgradeShopPanel(Vector3 position, string name, TowerScript towerScript)
+    public void DisplayUpgradeShopPanel(Transform CurentTower, string name, TowerScript towerScript)
     {
         foreach (GameObject panel in upgrateTowersPanels)
         {
             if (panel.name == name)
             {
                 panel.SetActive(true);
-                panel.transform.position = position;
+                panel.transform.position = CurentTower.transform.position;
                 // Assuming the upgrade buttons are the first three children in order
-                panel.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() => towerScript.UpgradeAttribute(TowerUpgradeType.Speed, position, panel));
-                panel.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(() => towerScript.UpgradeAttribute(TowerUpgradeType.Attack, position,panel));
-                panel.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(() => towerScript.UpgradeAttribute(TowerUpgradeType.Range, position,panel));
+                panel.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() => towerScript.UpgradeAttribute(TowerUpgradeType.Damage, CurentTower, panel));
+                Debug.Log("CurentTower = " + panel.transform.GetChild(0).GetComponent<Button>().name);
+                panel.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(() => towerScript.UpgradeAttribute(TowerUpgradeType.Range, CurentTower, panel));
+                Debug.Log("CurentTower = " + panel.transform.GetChild(1).GetComponent<Button>().name);
+                panel.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(() => towerScript.UpgradeAttribute(TowerUpgradeType.Speed, CurentTower, panel));
+                Debug.Log("CurentTower = " + panel.transform.GetChild(2).GetComponent<Button>().name);
+
 
 
 

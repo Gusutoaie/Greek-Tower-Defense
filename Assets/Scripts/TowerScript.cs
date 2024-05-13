@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class TowerScript : MonoBehaviour
@@ -31,7 +33,35 @@ public class TowerScript : MonoBehaviour
 
     public int UpgradeLevel => upgradeLevel;
     public int UpgradeCost => upgradeCost;
+    private bool IsPointerOverUIObject()
+    {
+        PointerEventData eventData = new PointerEventData(EventSystem.current);
+        eventData.position = Input.mousePosition;
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, results);
+        bool isOverUI = false;
+        foreach (RaycastResult result in results)
+        {
+            foreach (GameObject panel in TowerManager.Instance.upgrateTowersPanels)
+            {
+                if (result.gameObject == panel)
+                {
+                    isOverUI = true;
+                    break;
+                }
 
+            }
+        }
+        if (isOverUI)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
     private void Update()
     {
         if (target == null)
@@ -45,6 +75,19 @@ public class TowerScript : MonoBehaviour
         else
         {
             HandleFiring();
+        }
+        if (Input.GetMouseButtonDown(0)) // Checks if the left mouse button was pressed
+        {
+            if (!IsPointerOverUIObject())
+            {
+                foreach (GameObject panel in TowerManager.Instance.upgrateTowersPanels)
+                {
+                    if (panel.activeSelf)
+                    {
+                        panel.SetActive(false);
+                    }
+                }
+            }
         }
     }
 
@@ -91,7 +134,7 @@ public class TowerScript : MonoBehaviour
 
 
 
-    public void UpgradeAttribute(TowerManager.TowerUpgradeType upgradeType, Vector3 position, GameObject panel)
+    public void UpgradeAttribute(TowerManager.TowerUpgradeType upgradeType, Transform CurrentTower, GameObject panel)
     {
         if (GameManager.Instance.SpendGold(upgradeCost))
         {
@@ -106,7 +149,7 @@ public class TowerScript : MonoBehaviour
                         isUpgradeSuccessful = true;
                     }
                     break;
-                case TowerManager.TowerUpgradeType.Attack:
+                case TowerManager.TowerUpgradeType.Damage:
                     if (attackLevel < maxAbilityLevel)
                     {
                         currentDamage += 1f;
@@ -129,7 +172,11 @@ public class TowerScript : MonoBehaviour
             {
                 upgradeCost += 50;  // Increase the cost for the next upgrade
                 Debug.Log($"Tower upgraded: {upgradeType}. New stats: Speed {currentSpeed}, Damage {currentDamage}, Range {currentRange}, Levels: Speed {speedLevel}, Attack {attackLevel}, Range {rangeLevel}");
-                CheckMaxUpgrade(position);
+                Transform infoPanel = CurrentTower.transform.Find("InfoPanel");
+                infoPanel.Find("Speed").GetComponent<Text>().text = $"Speed: {currentSpeed}";
+                infoPanel.Find("Range").GetComponent<Text>().text = $"Range: {currentRange}";
+                infoPanel.Find("Damage").GetComponent<Text>().text = $"Damage: {currentDamage}";
+                CheckMaxUpgrade(CurrentTower.transform.position);
             }
             else
             {

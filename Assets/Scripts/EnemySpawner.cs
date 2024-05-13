@@ -26,8 +26,9 @@ public class EnemySpawner : MonoBehaviour
     private int enemiesLeftToSpawn;
     private bool isSpawning = false;
 
-
     public static EnemySpawner main;
+
+    public List<GameObject> enemies = new List<GameObject>();
 
     private void Awake()
     {
@@ -108,8 +109,7 @@ public class EnemySpawner : MonoBehaviour
     private void EnemyDestroyed()
     {
         enemiesAlive--;
-        GameManager.Instance.AddGold(100);
-
+     
     }
 
     private void SpawnEnemy()
@@ -122,8 +122,11 @@ public class EnemySpawner : MonoBehaviour
         }
 
         GameObject prefabToSpawn = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
-        Instantiate(prefabToSpawn, LevelScript.main.startPoint.position, Quaternion.identity);
 
+        
+        
+        GameObject Enemyy = Instantiate(prefabToSpawn, LevelScript.main.startPoint.position, Quaternion.identity);
+        enemies.Add(Enemyy);
     }
 
     private IEnumerator StartWave()

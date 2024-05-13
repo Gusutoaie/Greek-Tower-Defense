@@ -66,7 +66,7 @@ public class LevelScript : MonoBehaviour
 
         // Continuously update the gold display in the UI
         if (GameManager.Instance != null && GoldPanel != null)
-            GoldPanel.text = "Gold: " + GameManager.Instance.Gold;
+            GoldPanel.text = GameManager.Instance.Gold.ToString() ;
 
         if (Vector2.Distance(target.position, transform.position) < 0.1f)
         {
