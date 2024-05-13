@@ -26,7 +26,6 @@ public class HealthScript : MonoBehaviour
         if (currentHitPoints <= 0)
         {
             EnemySpawner.onEnemyDestroy.Invoke();
-            Tower.Gold += 10;
             Destroy(gameObject);
         }
     }

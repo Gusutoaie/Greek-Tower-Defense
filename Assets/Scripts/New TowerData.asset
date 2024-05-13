@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10f4d0b33a70d764589b9d29340d0bf6, type: 3}
+  m_Name: New TowerData
+  m_EditorClassIdentifier: 
+  towerName: PoseidonTowerButton
+  towerPrefabs:
+  - {fileID: 776105388949549154, guid: 8a121d361f1a8b24e83c8314d1178112, type: 3}
+  - {fileID: 7111339484249866529, guid: d443bfeb0af45d74aa2c94f824096b1e, type: 3}
+  - {fileID: 776105388949549154, guid: 9573df8d73166ea47ac9da623238f8ad, type: 3}
+  - {fileID: 7111339484249866529, guid: 11695afe1f1112e4abf94195fcd8ae44, type: 3}
+  - {fileID: 776105388949549154, guid: 52e09d2c90ed83843afb361d1fac3bc2, type: 3}
+  - {fileID: 7111339484249866529, guid: d8a18fefe61ffef4fbd397ed22569655, type: 3}
+  cost: 0
+  damage: 0
+  range: 0
+  description: 

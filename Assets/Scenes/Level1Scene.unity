@@ -2548,6 +2548,7 @@ GameObject:
   - component: {fileID: 651026384}
   - component: {fileID: 651026383}
   - component: {fileID: 651026382}
+  - component: {fileID: 651026387}
   m_Layer: 0
   m_Name: HadesTowerButton
   m_TagString: Untagged
@@ -2640,9 +2641,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: becd4e4fc06f3174fad6e8befdee20fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetingRange: 5
+  maxSpeed: 5
+  maxDamage: 5
+  maxRange: 5
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 0
   firingPoint: {fileID: 1239636604}
-  bps: 1
+  bulletPrefab: {fileID: 0}
 --- !u!114 &651026384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2725,6 +2731,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 651026380}
   m_CullTransparentMesh: 1
+--- !u!114 &651026387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 651026380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ca779aca0bf0a44bb55a4bd29d7831c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerData: {fileID: 11400000, guid: fa8d946b97bfbb940b42da179a79cc89, type: 2}
+  towerPosition: {fileID: 623060021}
+  savedPosition: {x: 0, y: 0, z: 0}
+  descriptionText: {fileID: 0}
 --- !u!1 &671287821
 GameObject:
   m_ObjectHideFlags: 0
@@ -2897,6 +2919,8 @@ GameObject:
   - component: {fileID: 712748060}
   - component: {fileID: 712748064}
   - component: {fileID: 712748065}
+  - component: {fileID: 712748066}
+  - component: {fileID: 712748067}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3011,22 +3035,6 @@ MonoBehaviour:
     m_Bits: 64
   bulletPrefab: {fileID: 915974246034967106, guid: f11ed7006b465eb499f7bb31e4810cca, type: 3}
   firingPoint: {fileID: 1752145853}
-  GoldPanel: {fileID: 446739030}
-  livesPanel: {fileID: 172226438}
-  GameStatusPanel: {fileID: 259562250}
-  towerPositions: {fileID: 623060021}
-  towerShopPanel: {fileID: 2043297910}
-  MessagesPanel: {fileID: 1959398062}
-  InfoPanel: {fileID: 216358594}
-  WavePanel: {fileID: 1038545919}
-  startPoint: {fileID: 1333219475}
-  towerButtons:
-  - {fileID: 7111339484249866531, guid: d443bfeb0af45d74aa2c94f824096b1e, type: 3}
-  - {fileID: 776105388949549152, guid: 8a121d361f1a8b24e83c8314d1178112, type: 3}
-  - {fileID: 7111339484249866531, guid: 11695afe1f1112e4abf94195fcd8ae44, type: 3}
-  - {fileID: 776105388949549152, guid: 9573df8d73166ea47ac9da623238f8ad, type: 3}
-  - {fileID: 7111339484249866531, guid: d8a18fefe61ffef4fbd397ed22569655, type: 3}
-  - {fileID: 776105388949549152, guid: 52e09d2c90ed83843afb361d1fac3bc2, type: 3}
   _enemyPaths:
   - {fileID: 310616772}
   - {fileID: 1242556439}
@@ -3052,6 +3060,15 @@ MonoBehaviour:
   - {fileID: 1188555277}
   - {fileID: 1117175844}
   - {fileID: 497551783}
+  GoldPanel: {fileID: 446739030}
+  livesPanel: {fileID: 172226438}
+  GameStatusPanel: {fileID: 259562250}
+  towerPositions: {fileID: 623060021}
+  towerShopPanel: {fileID: 2043297910}
+  MessagesPanel: {fileID: 1959398062}
+  InfoPanel: {fileID: 216358594}
+  WavePanel: {fileID: 1038545919}
+  startPoint: {fileID: 1333219475}
 --- !u!114 &712748065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3070,6 +3087,37 @@ MonoBehaviour:
   enemiesPerSecond: 0.5
   timeBetweenWaves: 0
   difficultyScalingFactor: 0.75
+--- !u!114 &712748066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712748059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ae549774d9fef4f9394c3438f5a12e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &712748067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712748059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7f9944ec96ad2d4d8f0d8a0f4dae1ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerShopPanel: {fileID: 2043297910}
+  PanelFromTowers: {fileID: 623060021}
+  upgrateTowersPanels:
+  - {fileID: 1188555277}
+  - {fileID: 1117175844}
+  - {fileID: 497551783}
+  TowersCopy: []
 --- !u!1 &735850135
 GameObject:
   m_ObjectHideFlags: 0
@@ -3399,6 +3447,7 @@ GameObject:
   - component: {fileID: 789450355}
   - component: {fileID: 789450354}
   - component: {fileID: 789450353}
+  - component: {fileID: 789450358}
   m_Layer: 0
   m_Name: AphroditaTowerButton
   m_TagString: Untagged
@@ -3491,9 +3540,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: becd4e4fc06f3174fad6e8befdee20fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetingRange: 5
+  maxSpeed: 5
+  maxDamage: 5
+  maxRange: 5
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 0
   firingPoint: {fileID: 767368330}
-  bps: 1
+  bulletPrefab: {fileID: 0}
 --- !u!114 &789450355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3576,6 +3630,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 789450351}
   m_CullTransparentMesh: 1
+--- !u!114 &789450358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789450351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ca779aca0bf0a44bb55a4bd29d7831c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerData: {fileID: 11400000, guid: fa8d946b97bfbb940b42da179a79cc89, type: 2}
+  towerPosition: {fileID: 623060021}
+  savedPosition: {x: 0, y: 0, z: 0}
+  descriptionText: {fileID: 0}
 --- !u!1 &833517349
 GameObject:
   m_ObjectHideFlags: 0
@@ -4654,6 +4724,7 @@ GameObject:
   - component: {fileID: 1095969736}
   - component: {fileID: 1095969739}
   - component: {fileID: 1095969740}
+  - component: {fileID: 1095969741}
   m_Layer: 0
   m_Name: PoseidonTowerButton
   m_TagString: Untagged
@@ -4777,9 +4848,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: becd4e4fc06f3174fad6e8befdee20fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetingRange: 5
+  maxSpeed: 5
+  maxDamage: 5
+  maxRange: 5
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 0
   firingPoint: {fileID: 1752145853}
-  bps: 1
+  bulletPrefab: {fileID: 0}
 --- !u!212 &1095969740
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4831,6 +4907,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1095969741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095969734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ca779aca0bf0a44bb55a4bd29d7831c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerData: {fileID: 11400000, guid: fa8d946b97bfbb940b42da179a79cc89, type: 2}
+  towerPosition: {fileID: 623060021}
+  savedPosition: {x: 0, y: 0, z: 0}
+  descriptionText: {fileID: 0}
 --- !u!1 &1113481304
 GameObject:
   m_ObjectHideFlags: 0
@@ -6276,6 +6368,7 @@ GameObject:
   - component: {fileID: 1753797981}
   - component: {fileID: 1753797980}
   - component: {fileID: 1753797984}
+  - component: {fileID: 1753797983}
   m_Layer: 0
   m_Name: TowerPosition2
   m_TagString: Untagged
@@ -6387,6 +6480,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1753797978}
   m_CullTransparentMesh: 1
+--- !u!114 &1753797983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1753797978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ca779aca0bf0a44bb55a4bd29d7831c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerData: {fileID: 11400000, guid: fa8d946b97bfbb940b42da179a79cc89, type: 2}
+  towerPosition: {fileID: 623060021}
+  savedPosition: {x: 0, y: 0, z: 0}
+  descriptionText: {fileID: 0}
 --- !u!212 &1753797984
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6486,6 +6595,7 @@ GameObject:
   - component: {fileID: 1817588475}
   - component: {fileID: 1817588474}
   - component: {fileID: 1817588478}
+  - component: {fileID: 1817588477}
   m_Layer: 0
   m_Name: TowerPosition1
   m_TagString: Untagged
@@ -6597,6 +6707,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1817588472}
   m_CullTransparentMesh: 1
+--- !u!114 &1817588477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817588472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ca779aca0bf0a44bb55a4bd29d7831c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerData: {fileID: 11400000, guid: fa8d946b97bfbb940b42da179a79cc89, type: 2}
+  towerPosition: {fileID: 623060021}
+  savedPosition: {x: 0, y: 0, z: 0}
+  descriptionText: {fileID: 0}
 --- !u!212 &1817588478
 SpriteRenderer:
   m_ObjectHideFlags: 0

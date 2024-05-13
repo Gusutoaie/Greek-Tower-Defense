@@ -108,6 +108,7 @@ public class EnemySpawner : MonoBehaviour
     private void EnemyDestroyed()
     {
         enemiesAlive--;
+        GameManager.Instance.AddGold(100);
 
     }
 

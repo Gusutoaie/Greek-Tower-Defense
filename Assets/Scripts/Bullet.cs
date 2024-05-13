@@ -10,27 +10,34 @@ public class Bullet : MonoBehaviour
 
 
     [Header("Attributes")]
-    [SerializeField] private static float bulletSpeed = 5f;
-    [SerializeField] private static float bulletDamage = 1;
+    [SerializeField] private  float bulletSpeed = 4f;
+    [SerializeField] private  float bulletDamage = 1;
     private Transform target;
+    
 
     public void SetTarget(Transform _target)
     {
         target = _target;
     }
 
-    public static void ChangebulletSpeed(float _bulletSpeed)
+    public float BulletSpeed
     {
-        bulletSpeed = _bulletSpeed;
+        get { return bulletSpeed; }
+        set { bulletSpeed = value; }
     }
 
-    //change bullet damage from another script 
-
-    public static void SetDamage(float _damage)
+    public float BulletDamage
     {
-        bulletDamage = _damage;
+        get { return bulletDamage; }
+        set { bulletDamage = value; }
     }
 
+    public void Initialize(float speed, float damage)
+    {
+        bulletSpeed = speed;
+        bulletDamage = damage;
+    }
+  
 
     private void FixedUpdate()
     {

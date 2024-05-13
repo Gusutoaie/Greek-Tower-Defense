@@ -214,9 +214,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: becd4e4fc06f3174fad6e8befdee20fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetingRange: 5
+  maxSpeed: 5
+  maxDamage: 5
+  maxRange: 5
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 64
   firingPoint: {fileID: 4710446632567809088}
-  bps: 1
+  bulletPrefab: {fileID: 915974246034967106, guid: 3fd53f4b95eb3c74e865e75cf1552075, type: 3}
 --- !u!1 &2745200900034276600
 GameObject:
   m_ObjectHideFlags: 0
