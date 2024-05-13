@@ -11,7 +11,7 @@ public class EnemyMovement : MonoBehaviour
 
     [Header("Attributes")]
     [SerializeField] private static float moveSpeed = 2f;
-
+ 
     private Transform target;
     private int pathIndex = 0;
     private static int defaultLives = 3;
@@ -41,7 +41,7 @@ public class EnemyMovement : MonoBehaviour
             pathIndex++;
             if(pathIndex >= LevelScript.main._enemyPaths.Length)
             {
-
+                LevelScript.main.isEnemyDestroyedByTower = true;
                 EnemySpawner.onEnemyDestroy.Invoke();
              
                 

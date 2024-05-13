@@ -109,6 +109,15 @@ public class EnemySpawner : MonoBehaviour
     private void EnemyDestroyed()
     {
         enemiesAlive--;
+        if(LevelScript.main.isEnemyDestroyedByTower)
+        {
+            LevelScript.main.isEnemyDestroyedByTower = false;
+            
+        }
+        else
+        {
+            GameManager.Instance.AddGold(100);
+        }
      
     }
 
