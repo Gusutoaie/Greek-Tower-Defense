@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -44,5 +45,17 @@ public class GameManager : MonoBehaviour
         Gold -= amount;
 
     }
-    
+    public void RestartGame()
+    {
+        // Reset the singleton instance
+        Instance = null;
+
+        // Destroy the GameManager object
+        Destroy(gameObject);
+
+        // Reload the first scene (assuming the first scene is at index 0)
+        SceneManager.LoadScene("Level1Scene");
+        Time.timeScale = 1;
+    }
+
 }

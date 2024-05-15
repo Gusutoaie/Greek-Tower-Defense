@@ -11,6 +11,8 @@ public class LevelScript : MonoBehaviour
     [SerializeField] private Transform firingPoint;
     [SerializeField] public Transform[] _enemyPaths;
     [SerializeField] private GameObject[] TowerUpgradePanels;
+    [SerializeField] public AudioClip GameOverAudio;
+    public AudioSource audioSource; // Reference to the AudioSource component
 
     public bool isEnemyDestroyedByTower = false;
     public Text GoldPanel;

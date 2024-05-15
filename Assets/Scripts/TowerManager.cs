@@ -301,6 +301,9 @@ public class TowerManager : MonoBehaviour
                 
                 panel.SetActive(true);
                 panel.transform.position = CurentTower.transform.position;
+                panel.transform.GetChild(0).GetComponent<Button>().onClick.RemoveAllListeners();
+                panel.transform.GetChild(1).GetComponent<Button>().onClick.RemoveAllListeners();
+                panel.transform.GetChild(2).GetComponent<Button>().onClick.RemoveAllListeners();
                 // Assuming the upgrade buttons are the first three children in order
                 panel.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() => towerScript.UpgradeAttribute(TowerUpgradeType.Damage, CurentTower, panel));
                 Debug.Log("CurentTower = " + panel.transform.GetChild(0).GetComponent<Button>().name);
@@ -314,9 +317,7 @@ public class TowerManager : MonoBehaviour
 
 
                 // Remove existing listeners to avoid stacking them
-                //panel.transform.GetChild(0).GetComponent<Button>().onClick.RemoveAllListeners();
-                //panel.transform.GetChild(1).GetComponent<Button>().onClick.RemoveAllListeners();
-                //panel.transform.GetChild(2).GetComponent<Button>().onClick.RemoveAllListeners();
+              
             }
         }
     }

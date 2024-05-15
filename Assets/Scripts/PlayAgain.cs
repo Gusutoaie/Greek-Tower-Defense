@@ -17,12 +17,7 @@ public class PlayAgain : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0)) //If the left mouse button is clicked
         {
-            // Stop movement of all enemies
-            Time.timeScale = 0;
-
-            
-            SceneManager.LoadScene("Level1Scene");
-            Time.timeScale = 1;
+            GameManager.Instance.RestartGame(); //Reset the towers
         }
     }
 }

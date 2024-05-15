@@ -11,6 +11,7 @@ public class EnemyMovement : MonoBehaviour
 
     [Header("Attributes")]
     [SerializeField] public float moveSpeed = 5f;
+    [SerializeField] private AudioSource audioSource;  // Reference to the AudioSource component
 
     private Transform target;
     private int pathIndex = 0;
@@ -59,6 +60,10 @@ public class EnemyMovement : MonoBehaviour
                     LevelScript.main.GameStatusPanel.color = Color.red;
                     LevelScript.main.MessagesPanel.SetActive(true);
                     LevelScript.main.InfoPanel.SetActive(false);
+                    // play game over audio
+
+                  
+
 
                     return;
                 }

@@ -289,6 +289,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1080500964499942814}
+  moveSpeed: 5
+  audioSource: {fileID: 0}
 --- !u!114 &7612210578771629182
 MonoBehaviour:
   m_ObjectHideFlags: 0

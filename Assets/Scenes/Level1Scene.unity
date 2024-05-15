@@ -3060,6 +3060,8 @@ MonoBehaviour:
   - {fileID: 1188555277}
   - {fileID: 1117175844}
   - {fileID: 497551783}
+  GameOverAudio: {fileID: 8300000, guid: ee8e5d18d3b25154fb20d86be2dbebae, type: 3}
+  audioSource: {fileID: 0}
   isEnemyDestroyedByTower: 0
   GoldPanel: {fileID: 446739030}
   livesPanel: {fileID: 172226438}

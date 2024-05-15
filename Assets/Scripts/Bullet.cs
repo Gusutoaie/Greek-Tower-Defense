@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private AudioSource audioSource;  // Reference to the AudioSource component
 
 
     [Header("Attributes")]
@@ -58,7 +59,11 @@ public class Bullet : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         other.gameObject.GetComponent<HealthScript>().TakeDamage(bulletDamage);
-       
+        if (audioSource != null)
+        {
+            audioSource.Play();
+        }
+
 
         Destroy(gameObject);  // Destroy the bullet on any collision
     }
