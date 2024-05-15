@@ -12,11 +12,11 @@ public class TowerScript : MonoBehaviour
     [SerializeField] private float maxRange = 5f;
     [SerializeField] public LayerMask enemyMask;
 
-    private float currentSpeed = 3f;
-    private float currentDamage = 3f;
+    private float currentSpeed = 20f;
+    private float currentDamage = 15f;
     private float currentRange = 3f;
     private float targetingRange = 4f;
-    private float bps = 1f;  // Bullets per second
+    private float bps = 5f;  // Bullets per second
 
     public Transform firingPoint;
     public GameObject bulletPrefab; // Assign this through the inspector
@@ -139,6 +139,99 @@ public class TowerScript : MonoBehaviour
         if (GameManager.Instance.SpendGold(upgradeCost))
         {
             bool isUpgradeSuccessful = false;
+            /* if (CurrentTower.transform.GetComponent<Image>().sprite.name == "AphroditaTower1")
+             {
+                 switch (upgradeType)
+                 {
+                     case TowerManager.TowerUpgradeType.Speed:
+                         if (speedLevel < maxAbilityLevel)
+                         {
+                             currentSpeed += 0.2f;
+                             speedLevel++;
+                             isUpgradeSuccessful = true;
+                         }
+                         break;
+                     case TowerManager.TowerUpgradeType.Damage:
+                         if (attackLevel < maxAbilityLevel)
+                         {
+                             currentDamage += 1f;
+                             attackLevel++;
+                             isUpgradeSuccessful = true;
+                         }
+                         break;
+                     case TowerManager.TowerUpgradeType.Range:
+                         if (rangeLevel < maxAbilityLevel)
+                         {
+                             currentRange += 0.5f;
+                             targetingRange += 0.5f;
+                             rangeLevel++;
+                             isUpgradeSuccessful = true;
+                         }
+                         break;
+                 }
+             }
+             else if (CurrentTower.transform.GetComponent<Image>().sprite.name == "DefaultTower")
+             {
+                 switch (upgradeType)
+                 {
+                     case TowerManager.TowerUpgradeType.Speed:
+                         if (speedLevel < maxAbilityLevel)
+                         {
+                             currentSpeed += 0.2f;
+                             speedLevel++;
+                             isUpgradeSuccessful = true;
+                         }
+                         break;
+                     case TowerManager.TowerUpgradeType.Damage:
+                         if (attackLevel < maxAbilityLevel)
+                         {
+                             currentDamage += 1f;
+                             attackLevel++;
+                             isUpgradeSuccessful = true;
+                         }
+                         break;
+                     case TowerManager.TowerUpgradeType.Range:
+                         if (rangeLevel < maxAbilityLevel)
+                         {
+                             currentRange += 0.5f;
+                             targetingRange += 0.5f;
+                             rangeLevel++;
+                             isUpgradeSuccessful = true;
+                         }
+                         break;
+                 }
+             }
+             else if (CurrentTower.transform.GetComponent<Image>().sprite.name == "TowerHades1")
+             {
+                 switch (upgradeType)
+                 {
+                     case TowerManager.TowerUpgradeType.Speed:
+                         if (speedLevel < maxAbilityLevel)
+                         {
+                             currentSpeed += 0.2f;
+                             speedLevel++;
+                             isUpgradeSuccessful = true;
+                         }
+                         break;
+                     case TowerManager.TowerUpgradeType.Damage:
+                         if (attackLevel < maxAbilityLevel)
+                         {
+                             currentDamage += 1f;
+                             attackLevel++;
+                             isUpgradeSuccessful = true;
+                         }
+                         break;
+                     case TowerManager.TowerUpgradeType.Range:
+                         if (rangeLevel < maxAbilityLevel)
+                         {
+                             currentRange += 0.5f;
+                             targetingRange += 0.5f;
+                             rangeLevel++;
+                             isUpgradeSuccessful = true;
+                         }
+                         break;
+                 }
+             }   */
             switch (upgradeType)
             {
                 case TowerManager.TowerUpgradeType.Speed:
@@ -172,6 +265,7 @@ public class TowerScript : MonoBehaviour
             {
                 upgradeCost += 50;  // Increase the cost for the next upgrade
                 Debug.Log($"Tower upgraded: {upgradeType}. New stats: Speed {currentSpeed}, Damage {currentDamage}, Range {currentRange}, Levels: Speed {speedLevel}, Attack {attackLevel}, Range {rangeLevel}");
+                Debug.Log($"upgradeCost=: {upgradeCost}");
                 Transform infoPanel = CurrentTower.transform.Find("InfoPanel");
                 infoPanel.Find("Speed").GetComponent<Text>().text = $"Speed: {currentSpeed}";
                 infoPanel.Find("Range").GetComponent<Text>().text = $"Range: {currentRange}";

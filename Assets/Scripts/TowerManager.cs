@@ -111,7 +111,7 @@ public class TowerManager : MonoBehaviour
 
                             Transform infoPanel = child.transform.Find("InfoPanel");
                             infoPanel.Find("Speed").GetComponent<Text>().text = $"Speed: 3";
-                            infoPanel.Find("Range").GetComponent<Text>().text = $"Range: 4";
+                            infoPanel.Find("Range").GetComponent<Text>().text = $"Range: 3";
                             infoPanel.Find("Damage").GetComponent<Text>().text = $"Damage: 3";
                             if (child.transform.GetComponent<Button>().name == "TowerPosition2")
                             {
@@ -168,7 +168,7 @@ public class TowerManager : MonoBehaviour
 
                             Transform infoPanel = child.transform.Find("InfoPanel");
                             infoPanel.Find("Speed").GetComponent<Text>().text = $"Speed: 3";
-                            infoPanel.Find("Range").GetComponent<Text>().text = $"Range: 4";
+                            infoPanel.Find("Range").GetComponent<Text>().text = $"Range: 3";
                             infoPanel.Find("Damage").GetComponent<Text>().text = $"Damage: 3";
                             if (child.transform.GetComponent<Button>().name == "TowerPosition2")
                             {
@@ -222,7 +222,7 @@ public class TowerManager : MonoBehaviour
 
                             Transform infoPanel = child.transform.Find("InfoPanel");
                             infoPanel.Find("Speed").GetComponent<Text>().text = $"Speed: 3";
-                            infoPanel.Find("Range").GetComponent<Text>().text = $"Range: 4";
+                            infoPanel.Find("Range").GetComponent<Text>().text = $"Range: 3";
                             infoPanel.Find("Damage").GetComponent<Text>().text = $"Damage: 3";
                             if (child.transform.GetComponent<Button>().name == "TowerPosition2")
                             {
@@ -292,10 +292,13 @@ public class TowerManager : MonoBehaviour
 
     public void DisplayUpgradeShopPanel(Transform CurentTower, string name, TowerScript towerScript)
     {
+        int count = 0;
         foreach (GameObject panel in upgrateTowersPanels)
         {
             if (panel.name == name)
             {
+                Debug.Log("Count = " + count++);
+                
                 panel.SetActive(true);
                 panel.transform.position = CurentTower.transform.position;
                 // Assuming the upgrade buttons are the first three children in order

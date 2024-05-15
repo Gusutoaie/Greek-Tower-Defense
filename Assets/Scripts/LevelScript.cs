@@ -12,6 +12,7 @@ public class LevelScript : MonoBehaviour
     [SerializeField] public Transform[] _enemyPaths;
     [SerializeField] private GameObject[] TowerUpgradePanels;
 
+    public bool isEnemyDestroyedByTower = false;
     public Text GoldPanel;
     public Text livesPanel;
     public Text GameStatusPanel;

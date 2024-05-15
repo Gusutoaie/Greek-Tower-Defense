@@ -14,6 +14,7 @@ public class HealthScript : MonoBehaviour
 
     private void Start()
     {
+        
         currentHitPoints = maxHitPoints;  // Initialize health
         UpdateHealthBar();  // Update the visual representation at start
     }
@@ -25,7 +26,7 @@ public class HealthScript : MonoBehaviour
 
         if (currentHitPoints <= 0)
         {
-            EnemySpawner.onEnemyDestroy.Invoke();
+            EnemySpawner.onEnemyDestroy.Invoke(gameObject);
             Destroy(gameObject);
         }
     }

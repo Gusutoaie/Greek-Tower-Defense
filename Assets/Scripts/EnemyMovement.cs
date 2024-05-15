@@ -10,7 +10,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
 
     [Header("Attributes")]
-    [SerializeField] private static float moveSpeed = 2f;
+    [SerializeField] public float moveSpeed = 5f;
 
     private Transform target;
     private int pathIndex = 0;
@@ -26,7 +26,7 @@ public class EnemyMovement : MonoBehaviour
     public static EnemyMovement main;
     //do a static references to movespeed get and setter
 
-    public static float MoveSpeed
+    public  float MoveSpeed
     {
         get { return moveSpeed; }
         set { moveSpeed = value; }
@@ -41,13 +41,14 @@ public class EnemyMovement : MonoBehaviour
             pathIndex++;
             if(pathIndex >= LevelScript.main._enemyPaths.Length)
             {
-
-                EnemySpawner.onEnemyDestroy.Invoke();
+                LevelScript.main.isEnemyDestroyedByTower = true;
+                EnemySpawner.onEnemyDestroy.Invoke(gameObject);
              
                 
                 defaultLives--;
                 LevelScript.main.livesPanel.text =  defaultLives.ToString();
                 
+                GameManager.Instance.enemyesAlive.Remove(gameObject);
                 Destroy(gameObject);
 
                 if (defaultLives <= 0)
@@ -95,9 +96,34 @@ public class EnemyMovement : MonoBehaviour
             float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
 
             // Set the rotation of the enemy
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle )); // Subtract 90 if forward is the y-axis
 
-           
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle)); // Subtract 90 if forward is the y-axis
+                                                                            
+                                                                             // Flip the enemy based on the direction while maintaining the original scale
+            
+            
+            if (targetDirection.x < 0)
+            {
+                if (targetDirection.y < 0)
+                {
+                    // Face right
+                    transform.localRotation = Quaternion.Euler(0, 0, 0);
+                }
+                else
+                {
+
+                    // Face left
+                    transform.localRotation = Quaternion.Euler(0, 180, 0);
+                }
+
+            }
+            else
+            {
+                // Face right
+                transform.localRotation = Quaternion.Euler(0, 0, 0);
+            }
+
+
         }
 
     }

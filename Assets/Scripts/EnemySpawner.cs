@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -17,7 +18,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float difficultyScalingFactor = 0.75f;
 
     [Header("Events")]
-    public static UnityEvent onEnemyDestroy = new UnityEvent();
+    public static UnityEvent<GameObject> onEnemyDestroy = new UnityEvent<GameObject>();
 
 
     private int currentWave = 1;
@@ -93,23 +94,58 @@ public class EnemySpawner : MonoBehaviour
 
     private void EndWave()
     {
+        
+
+       
         isSpawning = false;
         timeSinceLastSpawn = 0f;
 
         currentWave++;
         StartCoroutine(ShowWavePanel(1));  // Show and hide the panel when the wave ends
+        
 
-        EnemyMovement.MoveSpeed += 0.2f;
+        //EnemyMovement.main.MoveSpeed += 0.2f;
+       
+       
+            
+          
         enemiesPerSecond += 0.2f;
 
         StartCoroutine(StartWave());
+       
+     
     }
 
 
-    private void EnemyDestroyed()
+    private void EnemyDestroyed(GameObject enemy)
     {
         enemiesAlive--;
-     
+        if (LevelScript.main.isEnemyDestroyedByTower)
+        {
+            LevelScript.main.isEnemyDestroyedByTower = false;
+
+        }
+        else
+        {
+            //GameManager.Instance.AddGold(100);
+            //How to take image from enemy and add gold
+
+            if(enemy.name == "Minotaur1(Clone)")
+            {
+                GameManager.Instance.AddGold(1);
+            }
+            else
+                if(enemy.name == "Minotaur2(Clone)")
+            {
+                GameManager.Instance.AddGold(2);
+            }
+            else
+                if(enemy.name == "Minotaur3(Clone)")
+            {
+                GameManager.Instance.AddGold(5);
+            }
+        }
+
     }
 
     private void SpawnEnemy()
@@ -126,7 +162,7 @@ public class EnemySpawner : MonoBehaviour
         
         
         GameObject Enemyy = Instantiate(prefabToSpawn, LevelScript.main.startPoint.position, Quaternion.identity);
-        enemies.Add(Enemyy);
+        GameManager.Instance.enemyesAlive.Add(Enemyy);
     }
 
     private IEnumerator StartWave()

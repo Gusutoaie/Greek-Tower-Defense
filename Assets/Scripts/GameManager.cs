@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public int Gold { get; private set; } = 10000; // Initial gold
+    public List<GameObject> enemyesAlive = new List<GameObject>();
 
 
 
